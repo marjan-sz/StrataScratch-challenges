@@ -1,0 +1,24 @@
+brainstorm:
+1. group by dataset based on device_type column
+2. for each group (device type), find the row (record) with highest user_count (hint: make sure to consider duplicate highest user_count for each device_type)
+3. create a new column which concatenate start and end timestamps of above record (e.g. start_timestamp to end_timestamp)
+4. remove extra columns
+5. final dtaframe will have a record for each device_type with user_count and concatenated time-stamps
+
+my solution:
+
+# Import your libraries
+import pandas as pd
+
+# A function to return row indexes with highest user_count
+def get_max_score(group):
+    return group.loc[group['user_count'].max().merge(group)]
+
+
+
+user_activity.head()
+user_activity.shape
+gd = user_activity.groupby('device_type', as_index=False).user_count.max().merge(user_activity)
+gd['time_period'] = gd.apply(lambda row: str(row.start_timestamp) + " to " + str(row.end_timestamp), axis = 1)
+final_df = gd.drop(['start_timestamp','end_timestamp','time_difference'], axis=1)
+final_df.iloc[:,[1,2,0]]
