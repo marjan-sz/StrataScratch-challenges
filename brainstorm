@@ -1,8 +1,0 @@
-brainstorm:
-1. group by dataset based on device_type column
-2. for each group (device type), find the row (record) with highest user_count (hint: make sure to consider duplicate highest user_count for each device_type)
-3. create a new column which concatenate start and end timestamps of above record (e.g. start_timestamp to end_timestamp)
-4. remove extra columns
-5. final dtaframe will have a record for each device_type with user_count and concatenated time-stamps
-
-
